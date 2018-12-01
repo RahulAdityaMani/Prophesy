@@ -1,8 +1,8 @@
 '''
 Created on Dec 1, 2018
+
 @author: acani
 '''
-from fileinput import filename
 def create_team_data(filename):
     
     file = open(filename, "r")
@@ -48,32 +48,32 @@ def create_team_data(filename):
             game_data[winning_team][1][3] += points_against
             
             
-        if curr_game_info[1] == "Thu":
+        if curr_game_info[1] == "Thu": #If a Thursday Game
             game_data[winning_team][3][0] += 1
             game_data[winning_team][3][2] += points_for
             game_data[winning_team][3][3] += points_against
-        elif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat":
+        elif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat": #If a Sunday Game (or Saturday)
             game_data[winning_team][4][0] += 1
             game_data[winning_team][4][2] += points_for
             game_data[winning_team][4][3] += points_against
-        elif curr_game_info[1] == "Mon":
+        elif curr_game_info[1] == "Mon": #If a Monday Game
             game_data[winning_team][5][0] += 1
             game_data[winning_team][5][2] += points_for
             game_data[winning_team][5][3] += points_against
             
             
-        if time_of_day == 9 or time_of_day == 12 or time_of_day == 1:
+        if time_of_day == 9 or time_of_day == 12 or time_of_day == 1: #If a day game
             game_data[winning_team][6][0] += 1
             game_data[winning_team][6][2] += points_for
             game_data[winning_team][6][3] += points_against
-        elif time_of_day == 4:
+        elif time_of_day == 4: #If a middle/4:00 game
             game_data[winning_team][7][0] += 1
             game_data[winning_team][7][2] += points_for
             game_data[winning_team][7][3] += points_against
-        elif time_of_day == 7 or time_of_day == 8 or time_of_day == 10:
-            game_data[winning_team][7][0] += 1
-            game_data[winning_team][7][2] += points_for
-            game_data[winning_team][7][3] += points_against
+        elif time_of_day == 7 or time_of_day == 8 or time_of_day == 10: #If a night game
+            game_data[winning_team][8][0] += 1
+            game_data[winning_team][8][2] += points_for
+            game_data[winning_team][8][3] += points_against
             
             
                              
@@ -99,29 +99,29 @@ def create_team_data(filename):
             game_data[losing_team][2][3] += points_against
             
             
-        if curr_game_info[1] == "Thu":
+        if curr_game_info[1] == "Thu": #If a Thursday game
             game_data[losing_team][3][1] += 1
             game_data[losing_team][3][2] += points_for
             game_data[losing_team][3][3] += points_against 
-        elif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat":
+        elif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat": #If a Sunday game (or Saturday)
             game_data[losing_team][4][1] += 1
             game_data[losing_team][4][2] += points_for
             game_data[losing_team][4][3] += points_against
-        elif curr_game_info[1] == "Mon":
+        elif curr_game_info[1] == "Mon": #If a Monday game
             game_data[losing_team][5][1] += 1
             game_data[losing_team][5][2] += points_for
             game_data[losing_team][5][3] += points_against   
             
             
-        if time_of_day == 9 or time_of_day == 12 or time_of_day == 1:
+        if time_of_day == 9 or time_of_day == 12 or time_of_day == 1: #If a day game
             game_data[losing_team][6][1] += 1
             game_data[losing_team][6][2] += points_for
             game_data[losing_team][6][3] += points_against 
-        elif time_of_day == 4:
+        elif time_of_day == 4: #If a middle/4:00 game
             game_data[losing_team][7][1] += 1
             game_data[losing_team][7][2] += points_for
             game_data[losing_team][7][3] += points_against 
-        elif time_of_day == 7 or time_of_day == 8 or time_of_day == 10:
+        elif time_of_day == 7 or time_of_day == 8 or time_of_day == 10: #If a night game
             game_data[losing_team][8][1] += 1
             game_data[losing_team][8][2] += points_for
             game_data[losing_team][8][3] += points_against 
@@ -139,62 +139,27 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
     road_points = (home_points_allowed + road_points_for)/2
     return [home_points, road_points]
 
-def create_team_matchups(filename):
-    file = open(filename, "r")
-    team_matchups = {}
-    individual_team_matchup = [str(line.strip()) for line in file]
-    for i in range(15, 32):
-        curr_game_info = individual_team_matchup[i].split(",")
-        team_matchups[curr_game_info[4]] = {}
-        team_matchups[curr_game_info[6]] = {}
-    for i in range(0, 255):
-        curr_game_info = individual_team_matchup[i].split(",")
-        team_matchups[curr_game_info[4]][curr_game_info[6]] = [-1, -1]
-        team_matchups[curr_game_info[6]][curr_game_info[4]] = [-1, -1]
-    for curr_matchup in individual_team_matchup:
-        curr_matchup_info = curr_matchup.split(",")
-        winning_team = curr_matchup_info[4]
-        winning_team_data = curr_matchup_info[:4]
-        winning_team_data.extend(curr_matchup_info[5:])
-        winning_points_for = int(curr_matchup_info[8])
-        winning_points_against = int(curr_matchup_info[9])
-        losing_team = curr_matchup_info[6]
-        losing_team_data = curr_matchup_info[:6]
-        losing_team_data.extend(curr_matchup_info[7:])
-        losing_points_for = int(curr_matchup_info[9])
-        losing_points_against = int(curr_matchup_info[8])
-        
-        if (team_matchups[winning_team][losing_team][0] == -1):
-            team_matchups[winning_team][losing_team][0] = winning_points_for
-        else:
-            team_matchups[winning_team][losing_team][0] = (team_matchups[winning_team][losing_team][0] + winning_points_for) / 2
-        
-        if (team_matchups[winning_team][losing_team][1] == -1):
-            team_matchups[winning_team][losing_team][1] = winning_points_against
-        else:
-            team_matchups[winning_team][losing_team][1] = (team_matchups[winning_team][losing_team][1] + winning_points_against) / 2
-        
-        if (team_matchups[losing_team][winning_team][0] == -1):
-            team_matchups[losing_team][winning_team][0] = losing_points_for
-        else:
-            team_matchups[losing_team][winning_team][0] = (team_matchups[losing_team][winning_team][0] + losing_points_for) / 2
-        
-        if (team_matchups[losing_team][winning_team][1] == -1):
-            team_matchups[losing_team][winning_team][1] = losing_points_against
-        else:
-            team_matchups[losing_team][winning_team][1] = (team_matchups[losing_team][winning_team][1] + losing_points_against) / 2        
-    return team_matchups
-    
-
 
 
 if __name__ == '__main__':
     array = [1, 2, 3]
     team_data = create_team_data("seasonData.txt")
-    team_matchups = create_team_matchups("seasonData.txt")
+    
     #for i in team_data["Arizona Cardinals"]:
-    print("[PF, PA, W, L, HW, HL, HPF, HPA, RW, RL, RPF, RPA]")
+    print("[[W, L, PF, PA], [HW, HL, HPF, HPA], [RW, RL, RPF, RPA], [TW, TL, TPF, TPA], [SW, SL, SPF, SPA], [MW, ML, MPF, MPA], [1W, 1L, 1PF, 1PA], [4W, 4L, 4PF, 4PA], [8W, 8L, 8PF, 8PA]")
     print(team_data["Arizona Cardinals"])
     print(team_data["Seattle Seahawks"])
     print(predict_score(team_data, "Arizona Cardinals", "Seattle Seahawks", "Sun", 1))
-    print(team_matchups["Arizona Cardinals"])
+    team_data_file = open('TeamData.txt', 'w')
+    for team in team_data:
+        team_data_file.write(team + ",")
+        for type_of_game in range(0, len(team_data[team])):
+            for stat in range(0, len(team_data[team][type_of_game])):
+                team_data_file.write(str(team_data[team][type_of_game][stat])) 
+                if stat != len(team_data[team][type_of_game]) or type_of_game != len(team_data[team]):
+                    team_data_file.write(",")
+               
+        team_data_file.write('\n')
+       
+       
+       
