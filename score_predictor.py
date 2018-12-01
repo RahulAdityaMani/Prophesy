@@ -1,8 +1,8 @@
 '''
 Created on Dec 1, 2018
-
 @author: acani
 '''
+from fileinput import filename
 def create_team_data(filename):
     
     file = open(filename, "r")
@@ -139,13 +139,62 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
     road_points = (home_points_allowed + road_points_for)/2
     return [home_points, road_points]
 
+def create_team_matchups(filename):
+    file = open(filename, "r")
+    team_matchups = {}
+    individual_team_matchup = [str(line.strip()) for line in file]
+    for i in range(15, 32):
+        curr_game_info = individual_team_matchup[i].split(",")
+        team_matchups[curr_game_info[4]] = {}
+        team_matchups[curr_game_info[6]] = {}
+    for i in range(0, 255):
+        curr_game_info = individual_team_matchup[i].split(",")
+        team_matchups[curr_game_info[4]][curr_game_info[6]] = [-1, -1]
+        team_matchups[curr_game_info[6]][curr_game_info[4]] = [-1, -1]
+    for curr_matchup in individual_team_matchup:
+        curr_matchup_info = curr_matchup.split(",")
+        winning_team = curr_matchup_info[4]
+        winning_team_data = curr_matchup_info[:4]
+        winning_team_data.extend(curr_matchup_info[5:])
+        winning_points_for = int(curr_matchup_info[8])
+        winning_points_against = int(curr_matchup_info[9])
+        losing_team = curr_matchup_info[6]
+        losing_team_data = curr_matchup_info[:6]
+        losing_team_data.extend(curr_matchup_info[7:])
+        losing_points_for = int(curr_matchup_info[9])
+        losing_points_against = int(curr_matchup_info[8])
+        
+        if (team_matchups[winning_team][losing_team][0] == -1):
+            team_matchups[winning_team][losing_team][0] = winning_points_for
+        else:
+            team_matchups[winning_team][losing_team][0] = (team_matchups[winning_team][losing_team][0] + winning_points_for) / 2
+        
+        if (team_matchups[winning_team][losing_team][1] == -1):
+            team_matchups[winning_team][losing_team][1] = winning_points_against
+        else:
+            team_matchups[winning_team][losing_team][1] = (team_matchups[winning_team][losing_team][1] + winning_points_against) / 2
+        
+        if (team_matchups[losing_team][winning_team][0] == -1):
+            team_matchups[losing_team][winning_team][0] = losing_points_for
+        else:
+            team_matchups[losing_team][winning_team][0] = (team_matchups[losing_team][winning_team][0] + losing_points_for) / 2
+        
+        if (team_matchups[losing_team][winning_team][1] == -1):
+            team_matchups[losing_team][winning_team][1] = losing_points_against
+        else:
+            team_matchups[losing_team][winning_team][1] = (team_matchups[losing_team][winning_team][1] + losing_points_against) / 2        
+    return team_matchups
+    
+
 
 
 if __name__ == '__main__':
     array = [1, 2, 3]
     team_data = create_team_data("seasonData.txt")
+    team_matchups = create_team_matchups("seasonData.txt")
     #for i in team_data["Arizona Cardinals"]:
-    print("[[W, L, PF, PA], [HW, HL, HPF, HPA], [RW, RL, RPF, RPA], [TW, TL, TPF, TPA], [SW, SL, SPF, SPA], [MW, ML, MPF, MPA], [1W, 1L, 1PF, 1PA], [4W, 4L, 4PF, 4PA], [8W, 8L, 8PF, 8PA]")
+    print("[PF, PA, W, L, HW, HL, HPF, HPA, RW, RL, RPF, RPA]")
     print(team_data["Arizona Cardinals"])
     print(team_data["Seattle Seahawks"])
     print(predict_score(team_data, "Arizona Cardinals", "Seattle Seahawks", "Sun", 1))
+    print(team_matchups["Arizona Cardinals"])
