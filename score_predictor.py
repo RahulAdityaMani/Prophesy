@@ -364,20 +364,19 @@ if __name__ == '__main__':
     array = [1, 2, 3]
     team_data = create_team_data("seasonData.txt")
     team_matchups = create_team_matchups("seasonData.txt")
-    #for i in team_data["Arizona Cardinals"]:
-    print("[[W, L, PF, PA], [HW, HL, HPF, HPA], [RW, RL, RPF, RPA], [TW, TL, TPF, TPA], [SW, SL, SPF, SPA], [MW, ML, MPF, MPA], [1W, 1L, 1PF, 1PA], [4W, 4L, 4PF, 4PA], [8W, 8L, 8PF, 8PA]")
-    print(team_data["Philadelphia Eagles"])
-    print(team_data["Atlanta Falcons"])
-    print(predict_score(team_data, "Green Bay Packers", "Seattle Seahawks", "Thur", 8))
-    print(predict_score(team_data, "Carolina Panthers", "Dallas Cowboys", "Sun", 4))
-    print(team_matchups["Arizona Cardinals"])
-    team_data_file = open('TeamData.txt', 'w')
-    for team in team_data:
-        team_data_file.write(team + ",")
-        for type_of_game in range(0, len(team_data[team])):
-            for stat in range(0, len(team_data[team][type_of_game])):
-                team_data_file.write(str(team_data[team][type_of_game][stat])) 
-                if stat != len(team_data[team][type_of_game]) or type_of_game != len(team_data[team]):
-                    team_data_file.write(",")
-               
-        team_data_file.write('\n')
+
+    file = open("InputData.txt", "r")
+    
+    
+    individual_game_info = [str(line.strip()) for line in file]
+    file.close()
+    
+    output = open('Output.txt', 'w')
+    for curr_game in individual_game_info:
+        curr_game_info = curr_game.split(",")
+        predicted_score = predict_score(team_data, str(curr_game_info[0]), str(curr_game_info[1]), str(curr_game_info[2]), int(curr_game_info[3]))
+        output.write(str(predicted_score[0]) + "," + str(predicted_score[1]) + '\n')
+        
+       
+       
+       
