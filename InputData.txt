@@ -1,0 +1,177 @@
+Philadelphia Eagles,Atlanta Falcons,Thu,8
+Indianapolis Colts,Cincinnati Bengals,Sun,1
+Minnesota Vikings,San Francisco 49ers,Sun,1
+New York Giants,Jacksonville Jaguars,Sun,1
+New England Patriots,Houston Texans,Sun,1
+Baltimore Ravens,Buffalo Bills,Sun,1
+New Orleans Saints,Tampa Bay Buccaneers,Sun,1
+Cleveland Browns,Pittsburgh Steelers,Sun,1
+Miami Dolphins,Tennessee Titans,Sun,1
+Los Angeles Chargers,Kansas City Chiefs,Sun,4
+Denver Broncos,Seattle Seahawks,Sun,4
+Carolina Panthers,Dallas Cowboys,Sun,4
+Arizona Cardinals,Washington Redskins,Sun,4
+Green Bay Packers,Chicago Bears,Sun,8
+Detroit Lions,New York Jets,Mon,8
+Oakland Raiders,Los Angeles Rams,Mon,8
+Cincinnati Bengals,Baltimore Ravens,Thu,8
+New Orleans Saints,Cleveland Browns,Sun,1
+New York Jets,Miami Dolphins,Sun,1
+Tampa Bay Buccaneers,Philadelphia Eagles,Sun,1
+Green Bay Packers,Minnesota Vikings,Sun,1
+Washington Redskins,Indianapolis Colts,Sun,1
+Pittsburgh Steelers,Kansas City Chiefs,Sun,1
+Atlanta Falcons,Carolina Panthers,Sun,1
+Tennessee Titans,Houston Texans,Sun,1
+Buffalo Bills,Los Angeles Chargers,Sun,1
+Los Angeles Rams,Arizona Cardinals,Sun,4
+San Francisco 49ers,Detroit Lions,Sun,4
+Denver Broncos,Oakland Raiders,Sun,4
+Jacksonville Jaguars,New England Patriots,Sun,4
+Dallas Cowboys,New York Giants,Sun,8
+Chicago Bears,Seattle Seahawks,Mon,8
+Cleveland Browns,New York Jets,Thu,8
+Kansas City Chiefs,San Francisco 49ers,Sun,1
+Atlanta Falcons,New Orleans Saints,Sun,1
+Baltimore Ravens,Denver Broncos,Sun,1
+Jacksonville Jaguars,Tennessee Titans,Sun,1
+Houston Texans,New York Giants,Sun,1
+Minnesota Vikings,Buffalo Bills,Sun,1
+Miami Dolphins,Oakland Raiders,Sun,1
+Washington Redskins,Green Bay Packers,Sun,1
+Philadelphia Eagles,Indianapolis Colts,Sun,1
+Carolina Panthers,Cincinnati Bengals,Sun,1
+Los Angeles Rams,Los Angeles Chargers,Sun,4
+Seattle Seahawks,Dallas Cowboys,Sun,4
+Arizona Cardinals,Chicago Bears,Sun,4
+Detroit Lions,New England Patriots,Sun,8
+Tampa Bay Buccaneers,Pittsburgh Steelers,Mon,8
+Los Angeles Rams,Minnesota Vikings,Thu,8
+Dallas Cowboys,Detroit Lions,Sun,1
+Atlanta Falcons,Cincinnati Bengals,Sun,1
+Chicago Bears,Tampa Bay Buccaneers,Sun,1
+Jacksonville Jaguars,New York Jets,Sun,1
+Tennessee Titans,Philadelphia Eagles,Sun,1
+Green Bay Packers,Buffalo Bills,Sun,1
+New England Patriots,Miami Dolphins,Sun,1
+Indianapolis Colts,Houston Texans,Sun,1
+Arizona Cardinals,Seattle Seahawks,Sun,4
+Oakland Raiders,Cleveland Browns,Sun,4
+New York Giants,New Orleans Saints,Sun,4
+Los Angeles Chargers,San Francisco 49ers,Sun,4
+Pittsburgh Steelers,Baltimore Ravens,Sun,8
+Denver Broncos,Kansas City Chiefs,Mon,8
+New England Patriots,Indianapolis Colts,Thu,8
+Carolina Panthers,New York Giants,Sun,1
+Detroit Lions,Green Bay Packers,Sun,1
+Pittsburgh Steelers,Atlanta Falcons,Sun,1
+New York Jets,Denver Broncos,Sun,1
+Kansas City Chiefs,Jacksonville Jaguars,Sun,1
+Buffalo Bills,Tennessee Titans,Sun,1
+Cincinnati Bengals,Miami Dolphins,Sun,1
+Cleveland Browns,Baltimore Ravens,Sun,1
+Los Angeles Chargers,Oakland Raiders,Sun,4
+Seattle Seahawks,Los Angeles Rams,Sun,4
+San Francisco 49ers,Arizona Cardinals,Sun,4
+Philadelphia Eagles,Minnesota Vikings,Sun,4
+Houston Texans,Dallas Cowboys,Sun,8
+New Orleans Saints,Washington Redskins,Mon,8
+New York Giants,Philadelphia Eagles,Thu,8
+Washington Redskins,Carolina Panthers,Sun,1
+Miami Dolphins,Chicago Bears,Sun,1
+Houston Texans,Buffalo Bills,Sun,1
+Minnesota Vikings,Arizona Cardinals,Sun,1
+Cincinnati Bengals,Pittsburgh Steelers,Sun,1
+Cleveland Browns,Los Angeles Chargers,Sun,1
+New York Jets,Indianapolis Colts,Sun,1
+Atlanta Falcons,Tampa Bay Buccaneers,Sun,1
+Oakland Raiders,Seattle Seahawks,Sun,1
+Denver Broncos,Los Angeles Rams,Sun,4
+Tennessee Titans,Baltimore Ravens,Sun,4
+Dallas Cowboys,Jacksonville Jaguars,Sun,4
+New England Patriots,Kansas City Chiefs,Sun,8
+Green Bay Packers,San Francisco 49ers,Mon,8
+Arizona Cardinals,Denver Broncos,Thu,8
+Los Angeles Chargers,Tennessee Titans,Sun,1
+Miami Dolphins,Detroit Lions,Sun,1
+Philadelphia Eagles,Carolina Panthers,Sun,1
+Chicago Bears,New England Patriots,Sun,1
+New York Jets,Minnesota Vikings,Sun,1
+Indianapolis Colts,Buffalo Bills,Sun,1
+Jacksonville Jaguars,Houston Texans,Sun,1
+Tampa Bay Buccaneers,Cleveland Browns,Sun,1
+Baltimore Ravens,New Orleans Saints,Sun,4
+Washington Redskins,Dallas Cowboys,Sun,4
+San Francisco 49ers,Los Angeles Rams,Sun,4
+Kansas City Chiefs,Cincinnati Bengals,Sun,8
+Atlanta Falcons,New York Giants,Mon,8
+Houston Texans,Miami Dolphins,Thu,8
+Jacksonville Jaguars,Philadelphia Eagles,Sun,1
+Carolina Panthers,Baltimore Ravens,Sun,1
+Chicago Bears,New York Jets,Sun,1
+Detroit Lions,Seattle Seahawks,Sun,1
+Kansas City Chiefs,Denver Broncos,Sun,1
+New York Giants,Washington Redskins,Sun,1
+Cincinnati Bengals,Tampa Bay Buccaneers,Sun,1
+Pittsburgh Steelers,Cleveland Browns,Sun,1
+Oakland Raiders,Indianapolis Colts,Sun,4
+Los Angeles Rams,Green Bay Packers,Sun,4
+Arizona Cardinals,San Francisco 49ers,Sun,4
+Minnesota Vikings,New Orleans Saints,Sun,8
+Buffalo Bills,New England Patriots,Mon,8
+San Francisco 49ers,Oakland Raiders,Thu,8
+Minnesota Vikings,Detroit Lions,Sun,1
+Baltimore Ravens,Pittsburgh Steelers,Sun,1
+Carolina Panthers,Tampa Bay Buccaneers,Sun,1
+Washington Redskins,Atlanta Falcons,Sun,1
+Miami Dolphins,New York Jets,Sun,1
+Cleveland Browns,Kansas City Chiefs,Sun,1
+Buffalo Bills,Chicago Bears,Sun,1
+Seattle Seahawks,Los Angeles Chargers,Sun,4
+Denver Broncos,Houston Texans,Sun,4
+New Orleans Saints,Los Angeles Rams,Sun,4
+New England Patriots,Green Bay Packers,Sun,8
+Dallas Cowboys,Tennessee Titans,Mon,8
+Pittsburgh Steelers,Carolina Panthers,Thu,8
+Tampa Bay Buccaneers,Washington Redskins,Sun,1
+Cincinnati Bengals,New Orleans Saints,Sun,1
+Indianapolis Colts,Jacksonville Jaguars,Sun,1
+Chicago Bears,Detroit Lions,Sun,1
+Cleveland Browns,Atlanta Falcons,Sun,1
+Kansas City Chiefs,Arizona Cardinals,Sun,1
+New York Jets,Buffalo Bills,Sun,1
+Tennessee Titans,New England Patriots,Sun,1
+Oakland Raiders,Los Angeles Chargers,Sun,4
+Green Bay Packers,Miami Dolphins,Sun,4
+Los Angeles Rams,Seattle Seahawks,Sun,4
+Philadelphia Eagles,Dallas Cowboys,Sun,8
+San Francisco 49ers,New York Giants,Mon,8
+Seattle Seahawks,Green Bay Packers,Thu,8
+Atlanta Falcons,Dallas Cowboys,Sun,1
+Jacksonville Jaguars,Pittsburgh Steelers,Sun,1
+Baltimore Ravens,Cincinnati Bengals,Sun,1
+Indianapolis Colts,Tennessee Titans,Sun,1
+New York Giants,Tampa Bay Buccaneers,Sun,1
+Detroit Lions,Carolina Panthers,Sun,1
+Washington Redskins,Houston Texans,Sun,1
+Arizona Cardinals,Oakland Raiders,Sun,4
+Los Angeles Chargers,Denver Broncos,Sun,4
+New Orleans Saints,Philadelphia Eagles,Sun,4
+Chicago Bears,Minnesota Vikings,Sun,8
+Los Angeles Rams,Kansas City Chiefs,Mon,8
+Detroit Lions,Chicago Bears,Thu,1
+Dallas Cowboys,Washington Redskins,Thu,4
+New Orleans Saints,Atlanta Falcons,Thu,8
+Philadelphia Eagles,New York Giants,Sun,1
+Carolina Panthers,Seattle Seahawks,Sun,1
+Buffalo Bills,Jacksonville Jaguars,Sun,1
+Cincinnati Bengals,Cleveland Browns,Sun,1
+New York Jets,New England Patriots,Sun,1
+Tampa Bay Buccaneers,San Francisco 49ers,Sun,1
+Baltimore Ravens,Oakland Raiders,Sun,1
+Los Angeles Chargers,Arizona Cardinals,Sun,4
+Denver Broncos,Pittsburgh Steelers,Sun,4
+Indianapolis Colts,Miami Dolphins,Sun,4
+Minnesota Vikings,Green Bay Packers,Sun,8
+Houston Texans,Tennessee Titans,Mon,8
+Dallas Cowboys,New Orleans Saints,Thu,8
