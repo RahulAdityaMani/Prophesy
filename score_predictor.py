@@ -2,7 +2,6 @@
 Created on Dec 1, 2018
 @author: acani
 '''
-from fileinput import filename
 def create_team_data(filename):
     
     file = open(filename, "r")
@@ -218,6 +217,21 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
     road_points_for_at_time_of_day = 0.0
     home_points_against_at_time_of_day = 0.0
     road_points_against_at_time_of_day = 0.0
+    
+
+    weights = get_weights(curr_game_info[1], time_of_day)
+    points_for_weight = weights[0]
+    points_against_weight = weights[1]
+    points_for_home_weight = weights[2]
+    points_against_home_weight = weights[3]
+    points_for_road_weight = weights[4]
+    points_against_road_weight = weights[5]
+    points_for_day_weight = weights[6]
+    points_against_day_weight = weights[7]
+    points_for_time_weight = weights[8]
+    points_against_time_weight = weights[9]
+        
+        
     if(day_of_week == "Thu"):
         if(team_data[home_team][3][2] == -1):
             home_points_for_on_day_of_week = team_data[home_team][0][2]/16
@@ -298,17 +312,30 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
             road_points_for_at_time_of_day = team_data[road_team][8][2]/(team_data[road_team][8][0] + team_data[road_team][8][1])
             road_points_against_at_time_of_day = team_data[road_team][8][3]/(team_data[road_team][8][0] + team_data[road_team][8][1])
     
-    past_scores = create_team_matchups("seasonData.txt")
-    try:
-        home_past_points_for = past_scores[home_team][road_team][0]
-        home_past_points_against = past_scores[home_team][road_team][1]
-        road_past_points_for = past_scores[road_team][home_team][0]
-        road_past_points_against = past_scores[road_team][home_team][1]
-        home_points = (home_past_points_for + road_past_points_against + home_points_for_at_home + road_points_against_on_road + home_points_for_on_day_of_week + road_points_against_on_day_of_week + home_points_for_at_time_of_day + road_points_against_at_time_of_day) / 8
-        road_points = (road_past_points_for + home_past_points_against + road_points_for_on_road + home_points_against_at_home + road_points_for_on_day_of_week + home_points_against_on_day_of_week + road_points_for_at_time_of_day + home_points_against_at_time_of_day) / 8
-    except KeyError:
-        home_points = (home_points_for + road_points_allowed + home_points_for_at_home + road_points_against_on_road + home_points_for_on_day_of_week + road_points_against_on_day_of_week + home_points_for_at_time_of_day + road_points_against_at_time_of_day)/8
-        road_points = (home_points_allowed + road_points_for+ road_points_for_on_road + home_points_against_at_home + road_points_for_on_day_of_week + home_points_against_on_day_of_week + road_points_for_at_time_of_day + home_points_against_at_time_of_day)/8
+    #past_scores = create_team_matchups("seasonData.txt")
+    
+
+        
+        
+    home_points_for *= points_for_weight
+    road_points_for *= points_for_weight
+    home_points_allowed *= points_against_weight
+    road_points_allowed *= points_against_weight
+    home_points_for_at_home *= points_for_home_weight
+    road_points_for_on_road *= points_for_road_weight
+    home_points_against_at_home *= points_against_home_weight
+    road_points_against_on_road *= points_against_road_weight
+    home_points_for_on_day_of_week *= points_for_day_weight
+    road_points_for_on_day_of_week *= points_for_day_weight
+    home_points_against_on_day_of_week *= points_against_day_weight
+    road_points_against_on_day_of_week *= points_against_day_weight
+    home_points_for_at_time_of_day *= points_for_time_weight
+    road_points_for_at_time_of_day *= points_for_time_weight
+    home_points_against_at_time_of_day *= points_against_time_weight
+    road_points_against_at_time_of_day *= points_against_time_weight
+    
+    home_points = (home_points_for + road_points_allowed + home_points_for_at_home + road_points_against_on_road + home_points_for_on_day_of_week + road_points_against_on_day_of_week + home_points_for_at_time_of_day + road_points_against_at_time_of_day)/8
+    road_points = (road_points_for + home_points_allowed + road_points_for_on_road + home_points_against_at_home + road_points_for_on_day_of_week + home_points_against_on_day_of_week + road_points_for_at_time_of_day + home_points_against_at_time_of_day)/8
     return [home_points, road_points]
 
 def create_team_matchups(filename):
@@ -358,7 +385,57 @@ def create_team_matchups(filename):
     return team_matchups
     
 
-
+def get_weights(day_of_week, time_of_day):
+    points_for_weight = 1/16.57988911
+    points_against_weight = 1/7.809475806
+    points_for_home_weight = 1/17.9500378
+    points_against_home_weight = 1/12.08209425
+    points_for_road_weight = 1/22.85225554
+    points_against_road_weight = 1/18.23229587
+    points_for_thu_weight = 1/135.7006048
+    points_against_thu_weight = 1/131.6602823
+    points_for_sun_weight = 1/17.12467952
+    points_against_sun_weight = 1/9.143297173
+    points_for_mon_weight = 1/132.516129
+    points_against_mon_weight = 1/120.8324093
+    points_for_one_weight = 1/35.33302647
+    points_against_one_weight = 1/34.16551639
+    points_for_four_weight = 1/48.90442876
+    points_against_four_weight = 1/60.71823413
+    points_for_eight_weight = 1/88.36398718
+    points_against_eight_weight = 79.50043879
+    if day_of_week == "Thu":
+        points_for_day_weight = points_for_thu_weight
+        points_against_day_weight = points_against_thu_weight
+    elif day_of_week == "Mon":
+        points_for_day_weight = points_for_mon_weight
+        points_against_day_weight = points_against_mon_weight  
+    else:
+        points_for_day_weight = points_for_sun_weight
+        points_against_day_weight = points_against_sun_weight
+        
+    if time_of_day == 1:
+        points_for_time_weight = points_for_one_weight
+        points_against_time_weight = points_against_one_weight
+    elif time_of_day == 4:
+        points_for_time_weight = points_for_four_weight
+        points_against_time_weight = points_against_four_weight
+    else:
+        points_for_time_weight = points_for_eight_weight
+        points_against_time_weight = points_against_eight_weight
+        
+    weight_sum = points_for_weight + points_against_weight + points_for_home_weight + points_against_home_weight + points_for_road_weight + points_against_road_weight + points_for_day_weight + points_against_day_weight + points_for_time_weight + points_against_time_weight           
+    points_for_weight *= 8/weight_sum
+    points_against_weight *= 8/weight_sum
+    points_for_home_weight *= 8/weight_sum
+    points_against_home_weight *= 8/weight_sum
+    points_for_road_weight *= 8/weight_sum
+    points_against_road_weight *= 8/weight_sum
+    points_for_day_weight *= 8/weight_sum
+    points_against_day_weight *= 8/weight_sum
+    points_for_time_weight *= 8/weight_sum
+    points_against_time_weight *= 8/weight_sum
+    return [points_for_weight, points_against_weight, points_for_home_weight, points_against_home_weight, points_for_road_weight, points_against_road_weight, points_for_day_weight, points_against_day_weight, points_for_time_weight, points_against_time_weight]
 
 if __name__ == '__main__':
     array = [1, 2, 3]
