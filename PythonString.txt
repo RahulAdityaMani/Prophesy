@@ -1,0 +1,447 @@
+def create_team_data(filename):\n
+\n
+\tfile = open(filename, "r")\n
+\n
+\tgame_data = {}\n
+\n
+\n
+\tindividual_game_info = [str(line.strip()) for line in file]\n
+\n
+\n
+\tfor i in range(15, 32):\n
+\t\tcurr_game_info = individual_game_info[i].split(",")\n
+\t\tgame_data[curr_game_info[4]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1]]\n
+\t\tgame_data[curr_game_info[6]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1]]\n
+\n
+\n
+\tfor curr_game in individual_game_info:\n
+\t\tcurr_game_info = curr_game.split(",")\n
+\n
+\t\twinning_team = curr_game_info[4]\n
+\t\twinning_team_data = curr_game_info[:4]\n
+\t\twinning_team_data.extend(curr_game_info[5:])\n
+\t\tpoints_for = int(curr_game_info[8])\n
+\t\tpoints_against = int(curr_game_info[9])\n
+\t\ttime_of_day = int(curr_game_info[3].split(":")[0])\n
+\n
+\t\tgame_data[winning_team][0][0] += 1\n
+\t\tif(game_data[winning_team][0][2] == -1):\n
+\t\t\tgame_data[winning_team][0][2] += points_for + 1\n
+\t\t\tgame_data[winning_team][0][3] += points_against + 1\n
+\t\telse:\n
+\t\t\tgame_data[winning_team][0][2] += points_for\n
+\t\t\tgame_data[winning_team][0][3] += points_against\n
+\n
+\n
+\t\tif curr_game_info[5] == "@": #Win on the road\n
+\t\t\tgame_data[winning_team][2][0] += 1\n
+\t\t\tif(game_data[winning_team][2][2] == -1):\n
+\t\t\t\tgame_data[winning_team][2][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][2][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][2][2] += points_for\n
+\t\t\t\tgame_data[winning_team][2][3] += points_against\n
+\t\telse: #Win at home\n
+\t\t\tgame_data[winning_team][1][0] += 1\n
+\t\t\tif(game_data[winning_team][1][2] == -1):\n
+\t\t\t\tgame_data[winning_team][1][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][1][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][1][2] += points_for\n
+\t\t\t\tgame_data[winning_team][1][3] += points_against\n
+\n
+\n
+\t\tif curr_game_info[1] == "Thu":\n
+\t\t\tgame_data[winning_team][3][0] += 1\n
+\t\t\tif(game_data[winning_team][3][2] == -1):\n
+\t\t\t\tgame_data[winning_team][3][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][3][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][3][2] += points_for\n
+\t\t\t\tgame_data[winning_team][3][3] += points_against\n
+\t\telif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat":\n
+\t\t\tgame_data[winning_team][4][0] += 1\n
+\t\t\tif(game_data[winning_team][4][2] == -1):\n
+\t\t\t\tgame_data[winning_team][4][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][4][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][4][2] += points_for\n
+\t\t\t\tgame_data[winning_team][4][3] += points_against\n
+\t\telif curr_game_info[1] == "Mon":\n
+\t\t\tgame_data[winning_team][5][0] += 1\n
+\t\t\tif(game_data[winning_team][5][2] == -1):\n
+\t\t\t\tgame_data[winning_team][5][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][5][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][5][2] += points_for\n
+\t\t\t\tgame_data[winning_team][5][3] += points_against\n
+\n
+\n
+\t\tif time_of_day == 9 or time_of_day == 12 or time_of_day == 1:\n
+\t\t\tgame_data[winning_team][6][0] += 1\n
+\t\t\tif(game_data[winning_team][6][2] == -1):\n
+\t\t\t\tgame_data[winning_team][6][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][6][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][6][2] += points_for\n
+\t\t\t\tgame_data[winning_team][6][3] += points_against\n
+\t\telif time_of_day == 4:\n
+\t\t\tgame_data[winning_team][7][0] += 1\n
+\t\t\tif(game_data[winning_team][7][2] == -1):\n
+\t\t\t\tgame_data[winning_team][7][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][7][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][7][2] += points_for\n
+\t\t\t\tgame_data[winning_team][7][3] += points_against\n
+\t\telif time_of_day == 7 or time_of_day == 8 or time_of_day == 10:\n
+\t\t\tgame_data[winning_team][8][0] += 1\n
+\t\t\tif(game_data[winning_team][8][2] == -1):\n
+\t\t\t\tgame_data[winning_team][8][2] += points_for + 1\n
+\t\t\t\tgame_data[winning_team][8][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[winning_team][8][2] += points_for\n
+\t\t\t\tgame_data[winning_team][8][3] += points_against\n
+\n
+\n
+\n
+\n
+\t\tlosing_team = curr_game_info[6]\n
+\t\tlosing_team_data = curr_game_info[:6]\n
+\t\tlosing_team_data.extend(curr_game_info[7:])\n
+\n
+\t\tpoints_for = int(curr_game_info[9])\n
+\t\tpoints_against = int(curr_game_info[8])\n
+\n
+\t\tgame_data[losing_team][0][1] += 1\n
+\t\tif(game_data[losing_team][0][2] == -1):\n
+\t\t\tgame_data[losing_team][0][2] += points_for + 1\n
+\t\t\tgame_data[losing_team][0][3] += points_against + 1\n
+\t\telse:\n
+\t\t\tgame_data[losing_team][0][2] += points_for\n
+\t\t\tgame_data[losing_team][0][3] += points_against\n
+\n
+\t\tif curr_game_info[5] == "@": #Loss at home\n
+\t\t\tgame_data[losing_team][1][1] += 1\n
+\t\t\tif(game_data[losing_team][1][2] == -1):\n
+\t\t\t\tgame_data[losing_team][1][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][1][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][1][2] += points_for\n
+\t\t\t\tgame_data[losing_team][1][3] += points_against\n
+\t\telse: #Loss on the road\n
+\t\t\tgame_data[losing_team][2][1] += 1\n
+\t\t\tif(game_data[losing_team][2][2] == -1):\n
+\t\t\t\tgame_data[losing_team][2][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][2][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][2][2] += points_for\n
+\t\t\t\tgame_data[losing_team][2][3] += points_against\n
+\n
+\n
+\t\tif curr_game_info[1] == "Thu":\n
+\t\t\tgame_data[losing_team][3][1] += 1\n
+\t\t\tif(game_data[losing_team][3][2] == -1):\n
+\t\t\t\tgame_data[losing_team][3][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][3][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][3][2] += points_for\n
+\t\t\t\tgame_data[losing_team][3][3] += points_against\n
+\t\telif curr_game_info[1] == "Sun" or curr_game_info[1] == "Sat":\n
+\t\t\tgame_data[losing_team][4][1] += 1\n
+\t\t\tif(game_data[losing_team][4][2] == -1):\n
+\t\t\t\tgame_data[losing_team][4][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][4][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][4][2] += points_for\n
+\t\t\t\tgame_data[losing_team][4][3] += points_against\n
+\t\telif curr_game_info[1] == "Mon":\n
+\t\t\tgame_data[losing_team][5][1] += 1\n
+\t\t\tif(game_data[losing_team][5][2] == -1):\n
+\t\t\t\tgame_data[losing_team][5][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][5][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][5][2] += points_for\n
+\t\t\t\tgame_data[losing_team][5][3] += points_against\n
+\n
+\n
+\n
+\t\tif time_of_day == 9 or time_of_day == 12 or time_of_day == 1:\n
+\t\t\tgame_data[losing_team][6][1] += 1\n
+\t\t\tif(game_data[losing_team][6][2] == -1):\n
+\t\t\t\tgame_data[losing_team][6][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][6][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][6][2] += points_for\n
+\t\t\t\tgame_data[losing_team][6][3] += points_against\n
+\t\telif time_of_day == 4:\n
+\t\t\tgame_data[losing_team][7][1] += 1\n
+\t\t\tif(game_data[losing_team][7][2] == -1):\n
+\t\t\t\tgame_data[losing_team][7][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][7][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][7][2] += points_for\n
+\t\t\t\tgame_data[losing_team][7][3] += points_against\n
+\t\telif time_of_day == 7 or time_of_day == 8 or time_of_day == 10:\n
+\t\t\tgame_data[losing_team][8][1] += 1\n
+\t\t\tif(game_data[losing_team][8][2] == -1):\n
+\t\t\t\tgame_data[losing_team][8][2] += points_for + 1\n
+\t\t\t\tgame_data[losing_team][8][3] += points_against + 1\n
+\t\t\telse:\n
+\t\t\t\tgame_data[losing_team][8][2] += points_for\n
+\t\t\t\tgame_data[losing_team][8][3] += points_against\n
+\n
+\treturn game_data\n
+\n
+def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):\n
+\thome_points_for = team_data[home_team][0][2]/16\n
+\thome_points_allowed = team_data[home_team][0][3]/16\n
+\troad_points_for = team_data[road_team][0][2]/16\n
+\troad_points_allowed = team_data[road_team][0][3]/16\n
+\thome_points_for_at_home = team_data[home_team][1][2]/8\n
+\thome_points_against_at_home = team_data[home_team][1][3]/8\n
+\troad_points_for_on_road = team_data[road_team][2][2]/8\n
+\troad_points_against_on_road = team_data[road_team][2][3]/8\n
+\thome_points_for_on_day_of_week = 0.0\n
+\troad_points_for_on_day_of_week = 0.0\n
+\thome_points_against_on_day_of_week = 0.0\n
+\troad_points_against_on_day_of_week = 0.0\n
+\thome_points_for_at_time_of_day = 0.0\n
+\troad_points_for_at_time_of_day = 0.0\n
+\thome_points_against_at_time_of_day = 0.0\n
+\troad_points_against_at_time_of_day = 0.0\n
+\n
+\n
+\tweights = get_weights(curr_game_info[1], time_of_day)\n
+\tpoints_for_weight = weights[0]\n
+\tpoints_against_weight = weights[1]\n
+\tpoints_for_home_weight = weights[2]\n
+\tpoints_against_home_weight = weights[3]\n
+\tpoints_for_road_weight = weights[4]\n
+\tpoints_against_road_weight = weights[5]\n
+\tpoints_for_day_weight = weights[6]\n
+\tpoints_against_day_weight = weights[7]\n
+\tpoints_for_time_weight = weights[8]\n
+\tpoints_against_time_weight = weights[9]\n
+\n
+\n
+\tif(day_of_week == "Thu"):\n
+\t\tif(team_data[home_team][3][2] == -1):\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][3][2]/(team_data[home_team][3][0] + team_data[home_team][3][1])\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][3][3]/(team_data[home_team][3][0] + team_data[home_team][3][1])\n
+\t\tif(team_data[road_team][3][2] == -1):\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][3][2]/(team_data[road_team][3][0] + team_data[road_team][3][1])\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][3][3]/(team_data[road_team][3][0] + team_data[road_team][3][1])\n
+\telif(day_of_week == "Sun" or day_of_week == "Sat"):\n
+\t\tif(team_data[home_team][4][2] == -1):\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][4][2]/(team_data[home_team][4][0] + team_data[home_team][4][1])\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][4][3]/(team_data[home_team][4][0] + team_data[home_team][4][1])\n
+\t\tif(team_data[road_team][4][2] == -1):\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][4][2]/(team_data[road_team][4][0] + team_data[road_team][4][1])\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][4][3]/(team_data[road_team][4][0] + team_data[road_team][4][1])\n
+\telse:\n
+\t\tif(team_data[home_team][5][2] == -1):\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_on_day_of_week = team_data[home_team][5][2]/(team_data[home_team][5][0] + team_data[home_team][5][1])\n
+\t\t\thome_points_against_on_day_of_week = team_data[home_team][5][3]/(team_data[home_team][5][0] + team_data[home_team][5][1])\n
+\t\tif(team_data[road_team][5][2] == -1):\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_on_day_of_week = team_data[road_team][5][2]/(team_data[road_team][5][0] + team_data[road_team][5][1])\n
+\t\t\troad_points_against_on_day_of_week = team_data[road_team][5][3]/(team_data[road_team][5][0] + team_data[road_team][5][1])\n
+\n
+\tif time_of_day == 9 or time_of_day == 12 or time_of_day == 1:\n
+\t\tif(team_data[home_team][6][2] == -1):\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][6][2]/(team_data[home_team][6][0] + team_data[home_team][6][1])\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][6][3]/(team_data[home_team][6][0] + team_data[home_team][6][1])\n
+\t\tif(team_data[road_team][6][2] == -1):\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][6][2]/(team_data[road_team][6][0] + team_data[road_team][6][1])\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][6][3]/(team_data[road_team][6][0] + team_data[road_team][6][1])\n
+\telif time_of_day == 4:\n
+\t\tif(team_data[home_team][7][2] == -1):\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][7][2]/(team_data[home_team][7][0] + team_data[home_team][7][1])\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][7][3]/(team_data[home_team][7][0] + team_data[home_team][7][1])\n
+\t\tif(team_data[road_team][7][2] == -1):\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][7][2]/(team_data[road_team][7][0] + team_data[road_team][7][1])\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][7][3]/(team_data[road_team][7][0] + team_data[road_team][7][1])\n
+\telse:\n
+\t\tif(team_data[home_team][8][2] == -1):\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][0][2]/16\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][0][3]/16\n
+\t\telse:\n
+\t\t\thome_points_for_at_time_of_day = team_data[home_team][8][2]/(team_data[home_team][8][0] + team_data[home_team][8][1])\n
+\t\t\thome_points_against_at_time_of_day = team_data[home_team][8][3]/(team_data[home_team][8][0] + team_data[home_team][8][1])\n
+\t\tif(team_data[road_team][8][2] == -1):\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][0][2]/16\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][0][3]/16\n
+\t\telse:\n
+\t\t\troad_points_for_at_time_of_day = team_data[road_team][8][2]/(team_data[road_team][8][0] + team_data[road_team][8][1])\n
+\t\t\troad_points_against_at_time_of_day = team_data[road_team][8][3]/(team_data[road_team][8][0] + team_data[road_team][8][1])\n
+\n
+\t#past_scores = create_team_matchups("seasonData.txt")\n
+\n
+\n
+\n
+\n
+\thome_points_for *= points_for_weight\n
+\troad_points_for *= points_for_weight\n
+\thome_points_allowed *= points_against_weight\n
+\troad_points_allowed *= points_against_weight\n
+\thome_points_for_at_home *= points_for_home_weight\n
+\troad_points_for_on_road *= points_for_road_weight\n
+\thome_points_against_at_home *= points_against_home_weight\n
+\troad_points_against_on_road *= points_against_road_weight\n
+\thome_points_for_on_day_of_week *= points_for_day_weight\n
+\troad_points_for_on_day_of_week *= points_for_day_weight\n
+\thome_points_against_on_day_of_week *= points_against_day_weight\n
+\troad_points_against_on_day_of_week *= points_against_day_weight\n
+\thome_points_for_at_time_of_day *= points_for_time_weight\n
+\troad_points_for_at_time_of_day *= points_for_time_weight\n
+\thome_points_against_at_time_of_day *= points_against_time_weight\n
+\troad_points_against_at_time_of_day *= points_against_time_weight\n
+\t\n
+\thome_points = (home_points_for + road_points_allowed + home_points_for_at_home + road_points_against_on_road + home_points_for_on_day_of_week + road_points_against_on_day_of_week + home_points_for_at_time_of_day + road_points_against_at_time_of_day)/8\n
+\troad_points = (road_points_for + home_points_allowed + road_points_for_on_road + home_points_against_at_home + road_points_for_on_day_of_week + home_points_against_on_day_of_week + road_points_for_at_time_of_day + home_points_against_at_time_of_day)/8\n
+\treturn [home_points, road_points]\n
+\n
+def create_team_matchups(filename):\n
+\tfile = open(filename, "r")\n
+\tteam_matchups = {}\n
+\tindividual_team_matchup = [str(line.strip()) for line in file]\n
+\tfor i in range(15, 32):\n
+\t\tcurr_game_info = individual_team_matchup[i].split(",")\n
+\t\tteam_matchups[curr_game_info[4]] = {}\n
+\t\tteam_matchups[curr_game_info[6]] = {}\n
+\tfor i in range(0, 255):\n
+\t\tcurr_game_info = individual_team_matchup[i].split(",")\n
+\t\tteam_matchups[curr_game_info[4]][curr_game_info[6]] = [-1, -1]\n
+\t\tteam_matchups[curr_game_info[6]][curr_game_info[4]] = [-1, -1]\n
+\tfor curr_matchup in individual_team_matchup:\n
+\t\tcurr_matchup_info = curr_matchup.split(",")\n
+\t\twinning_team = curr_matchup_info[4]\n
+\t\twinning_team_data = curr_matchup_info[:4]\n
+\t\twinning_team_data.extend(curr_matchup_info[5:])\n
+\t\twinning_points_for = int(curr_matchup_info[8])\n
+\t\twinning_points_against = int(curr_matchup_info[9])\n
+\t\tlosing_team = curr_matchup_info[6]\n
+\t\tlosing_team_data = curr_matchup_info[:6]\n
+\t\tlosing_team_data.extend(curr_matchup_info[7:])\n
+\t\tlosing_points_for = int(curr_matchup_info[9])\n
+\t\tlosing_points_against = int(curr_matchup_info[8])\n
+\t\t\n
+\t\tif (team_matchups[winning_team][losing_team][0] == -1):\n
+\t\t\tteam_matchups[winning_team][losing_team][0] = winning_points_for\n
+\t\telse:\n
+\t\t\tteam_matchups[winning_team][losing_team][0] = (team_matchups[winning_team][losing_team][0] + winning_points_for) / 2\n
+\t\t\n
+\t\tif (team_matchups[winning_team][losing_team][1] == -1):\n
+\t\t\tteam_matchups[winning_team][losing_team][1] = winning_points_against\n
+\t\telse:\n
+\t\t\tteam_matchups[winning_team][losing_team][1] = (team_matchups[winning_team][losing_team][1] + winning_points_against) / 2\n
+\t\t\n
+\t\tif (team_matchups[losing_team][winning_team][0] == -1):\n
+\t\t\tteam_matchups[losing_team][winning_team][0] = losing_points_for\n
+\t\telse:\n
+\t\t\tteam_matchups[losing_team][winning_team][0] = (team_matchups[losing_team][winning_team][0] + losing_points_for) / 2\n
+\t\t\n
+\t\tif (team_matchups[losing_team][winning_team][1] == -1):\n
+\t\t\tteam_matchups[losing_team][winning_team][1] = losing_points_against\n
+\t\telse:\n
+\t\t\tteam_matchups[losing_team][winning_team][1] = (team_matchups[losing_team][winning_team][1] + losing_points_against) / 2\n
+\treturn team_matchups\n
+\n
+\n
+def get_weights(day_of_week, time_of_day):\n
+\tpoints_for_weight = 1/16.57988911\n
+\tpoints_against_weight = 1/7.809475806\n
+\tpoints_for_home_weight = 1/17.9500378\n
+\tpoints_against_home_weight = 1/12.08209425\n
+\tpoints_for_road_weight = 1/22.85225554\n
+\tpoints_against_road_weight = 1/18.23229587\n
+\tpoints_for_thu_weight = 1/135.7006048\n
+\tpoints_against_thu_weight = 1/131.6602823\n
+\tpoints_for_sun_weight = 1/17.12467952\n
+\tpoints_against_sun_weight = 1/9.143297173\n
+\tpoints_for_mon_weight = 1/132.516129\n
+\tpoints_against_mon_weight = 1/120.8324093\n
+\tpoints_for_one_weight = 1/35.33302647\n
+\tpoints_against_one_weight = 1/34.16551639\n
+\tpoints_for_four_weight = 1/48.90442876\n
+\tpoints_against_four_weight = 1/60.71823413\n
+\tpoints_for_eight_weight = 1/88.36398718\n
+\tpoints_against_eight_weight = 79.50043879\n
+\tif day_of_week == "Thu":\n
+\t\tpoints_for_day_weight = points_for_thu_weight\n
+\t\tpoints_against_day_weight = points_against_thu_weight\n
+\telif day_of_week == "Mon":\n
+\t\tpoints_for_day_weight = points_for_mon_weight\n
+\t\tpoints_against_day_weight = points_against_mon_weight\n  
+\telse:\n
+\t\tpoints_for_day_weight = points_for_sun_weight\n
+\t\tpoints_against_day_weight = points_against_sun_weight\n
+\t\t\n
+\tif time_of_day == 1:\n
+\t\tpoints_for_time_weight = points_for_one_weight\n
+\t\tpoints_against_time_weight = points_against_one_weight\n
+\telif time_of_day == 4:\n
+\t\tpoints_for_time_weight = points_for_four_weight\n
+\t\tpoints_against_time_weight = points_against_four_weight\n
+\telse:\n
+\t\tpoints_for_time_weight = points_for_eight_weight\n
+\t\tpoints_against_time_weight = points_against_eight_weight\n
+\t\t\n
+\tweight_sum = points_for_weight + points_against_weight + points_for_home_weight + points_against_home_weight + points_for_road_weight + points_against_road_weight + points_for_day_weight + points_against_day_weight + points_for_time_weight + points_against_time_weight\n
+\tpoints_for_weight *= 8/weight_sum\n
+\tpoints_against_weight *= 8/weight_sum\n
+\tpoints_for_home_weight *= 8/weight_sum\n
+\tpoints_against_home_weight *= 8/weight_sum\n
+\tpoints_for_road_weight *= 8/weight_sum\n
+\tpoints_against_road_weight *= 8/weight_sum\n
+\tpoints_for_day_weight *= 8/weight_sum\n
+\tpoints_against_day_weight *= 8/weight_sum\n
+\tpoints_for_time_weight *= 8/weight_sum\n
+\tpoints_against_time_weight *= 8/weight_sum\n
+\treturn [points_for_weight, points_against_weight, points_for_home_weight, points_against_home_weight, points_for_road_weight, points_against_road_weight, points_for_day_weight, points_against_day_weight, points_for_time_weight, points_against_time_weight]\n
+\n
+if __name__ == '__main__':\n
+\tarray = [1, 2, 3]\n
+\tteam_data = create_team_data("seasonData.txt")\n
+\tteam_matchups = create_team_matchups("seasonData.txt")\n
+\n
+\tfile = open("InputData.txt", "r")\n
+\n
+\n
+\tindividual_game_info = [str(line.strip()) for line in file]\n
+\tfile.close()\n
+\n
+\toutput = open('Output.txt', 'w')\n
+\tfor curr_game in individual_game_info:\n
+\t\tcurr_game_info = curr_game.split(",")\n
+\t\tpredicted_score = predict_score(team_data, str(curr_game_info[0]), str(curr_game_info[1]), str(curr_game_info[2]), int(curr_game_info[3]))\n
+\t\toutput.write(str(predicted_score[0]) + "," + str(predicted_score[1]) + '\n')
