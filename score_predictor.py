@@ -1,6 +1,6 @@
 '''
 Created on Dec 1, 2018
-@author: acani
+@author: acanino & rahulmani
 '''
 def create_team_data(filename):
     
