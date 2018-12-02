@@ -3,35 +3,31 @@ Created on Dec 1, 2018
 @author: acanino & rahulmani
 '''
 def create_team_data(filename):
-    
+
     file = open(filename, "r")
-    
+
     game_data = {}
-    
-    
+
+
     individual_game_info = [str(line.strip()) for line in file]
-    
-    
+
+
     for i in range(15, 32):
         curr_game_info = individual_game_info[i].split(",")
-        game_data[curr_game_info[4]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], 
-                                        [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], 
-                                        [0, 0, -1, -1]]
-        game_data[curr_game_info[6]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], 
-                                        [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], 
-                                        [0, 0, -1, -1]]
-        
-        
+        game_data[curr_game_info[4]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1]]
+        game_data[curr_game_info[6]] = [[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1],[0, 0, -1, -1], [0, 0, -1, -1], [0, 0, -1, -1]]
+
+
     for curr_game in individual_game_info:
         curr_game_info = curr_game.split(",")
-        
+
         winning_team = curr_game_info[4]
         winning_team_data = curr_game_info[:4]
         winning_team_data.extend(curr_game_info[5:])
         points_for = int(curr_game_info[8])
         points_against = int(curr_game_info[9])
         time_of_day = int(curr_game_info[3].split(":")[0])
-        
+
         game_data[winning_team][0][0] += 1
         if(game_data[winning_team][0][2] == -1):
             game_data[winning_team][0][2] += points_for + 1
@@ -39,8 +35,8 @@ def create_team_data(filename):
         else:
             game_data[winning_team][0][2] += points_for
             game_data[winning_team][0][3] += points_against
-            
-        
+
+
         if curr_game_info[5] == "@": #Win on the road
             game_data[winning_team][2][0] += 1
             if(game_data[winning_team][2][2] == -1):
@@ -57,8 +53,8 @@ def create_team_data(filename):
             else:
                 game_data[winning_team][1][2] += points_for
                 game_data[winning_team][1][3] += points_against
-            
-            
+
+
         if curr_game_info[1] == "Thu":
             game_data[winning_team][3][0] += 1
             if(game_data[winning_team][3][2] == -1):
@@ -83,8 +79,8 @@ def create_team_data(filename):
             else:
                 game_data[winning_team][5][2] += points_for
                 game_data[winning_team][5][3] += points_against
-            
-            
+
+
         if time_of_day == 9 or time_of_day == 12 or time_of_day == 1:
             game_data[winning_team][6][0] += 1
             if(game_data[winning_team][6][2] == -1):
@@ -109,17 +105,17 @@ def create_team_data(filename):
             else:
                 game_data[winning_team][8][2] += points_for
                 game_data[winning_team][8][3] += points_against
-            
-            
-                             
-        
+
+
+
+
         losing_team = curr_game_info[6]
         losing_team_data = curr_game_info[:6]
         losing_team_data.extend(curr_game_info[7:])
-        
+
         points_for = int(curr_game_info[9])
         points_against = int(curr_game_info[8])
-        
+
         game_data[losing_team][0][1] += 1
         if(game_data[losing_team][0][2] == -1):
             game_data[losing_team][0][2] += points_for + 1
@@ -127,7 +123,7 @@ def create_team_data(filename):
         else:
             game_data[losing_team][0][2] += points_for
             game_data[losing_team][0][3] += points_against
-        
+
         if curr_game_info[5] == "@": #Loss at home
             game_data[losing_team][1][1] += 1
             if(game_data[losing_team][1][2] == -1):
@@ -144,8 +140,8 @@ def create_team_data(filename):
             else:
                 game_data[losing_team][2][2] += points_for
                 game_data[losing_team][2][3] += points_against
-            
-            
+
+
         if curr_game_info[1] == "Thu":
             game_data[losing_team][3][1] += 1
             if(game_data[losing_team][3][2] == -1):
@@ -170,9 +166,9 @@ def create_team_data(filename):
             else:
                 game_data[losing_team][5][2] += points_for
                 game_data[losing_team][5][3] += points_against
-        
-            
-            
+
+
+
         if time_of_day == 9 or time_of_day == 12 or time_of_day == 1:
             game_data[losing_team][6][1] += 1
             if(game_data[losing_team][6][2] == -1):
@@ -217,7 +213,7 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
     road_points_for_at_time_of_day = 0.0
     home_points_against_at_time_of_day = 0.0
     road_points_against_at_time_of_day = 0.0
-    
+
 
     weights = get_weights(curr_game_info[1], time_of_day)
     points_for_weight = weights[0]
@@ -230,8 +226,8 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
     points_against_day_weight = weights[7]
     points_for_time_weight = weights[8]
     points_against_time_weight = weights[9]
-        
-        
+
+
     if(day_of_week == "Thu"):
         if(team_data[home_team][3][2] == -1):
             home_points_for_on_day_of_week = team_data[home_team][0][2]/16
@@ -244,7 +240,7 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
             road_points_against_on_day_of_week = team_data[road_team][0][3]/16
         else:
             road_points_for_on_day_of_week = team_data[road_team][3][2]/(team_data[road_team][3][0] + team_data[road_team][3][1])
-            road_points_against_on_day_of_week = team_data[road_team][3][3]/(team_data[road_team][3][0] + team_data[road_team][3][1])     
+            road_points_against_on_day_of_week = team_data[road_team][3][3]/(team_data[road_team][3][0] + team_data[road_team][3][1])
     elif(day_of_week == "Sun" or day_of_week == "Sat"):
         if(team_data[home_team][4][2] == -1):
             home_points_for_on_day_of_week = team_data[home_team][0][2]/16
@@ -271,7 +267,7 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
         else:
             road_points_for_on_day_of_week = team_data[road_team][5][2]/(team_data[road_team][5][0] + team_data[road_team][5][1])
             road_points_against_on_day_of_week = team_data[road_team][5][3]/(team_data[road_team][5][0] + team_data[road_team][5][1])
-            
+
     if time_of_day == 9 or time_of_day == 12 or time_of_day == 1:
         if(team_data[home_team][6][2] == -1):
             home_points_for_at_time_of_day = team_data[home_team][0][2]/16
@@ -297,7 +293,7 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
             road_points_against_at_time_of_day = team_data[road_team][0][3]/16
         else:
             road_points_for_at_time_of_day = team_data[road_team][7][2]/(team_data[road_team][7][0] + team_data[road_team][7][1])
-            road_points_against_at_time_of_day = team_data[road_team][7][3]/(team_data[road_team][7][0] + team_data[road_team][7][1])  
+            road_points_against_at_time_of_day = team_data[road_team][7][3]/(team_data[road_team][7][0] + team_data[road_team][7][1])
     else:
         if(team_data[home_team][8][2] == -1):
             home_points_for_at_time_of_day = team_data[home_team][0][2]/16
@@ -311,12 +307,12 @@ def predict_score(team_data, home_team, road_team, day_of_week, time_of_day):
         else:
             road_points_for_at_time_of_day = team_data[road_team][8][2]/(team_data[road_team][8][0] + team_data[road_team][8][1])
             road_points_against_at_time_of_day = team_data[road_team][8][3]/(team_data[road_team][8][0] + team_data[road_team][8][1])
-    
-    #past_scores = create_team_matchups("seasonData.txt")
-    
 
-        
-        
+    #past_scores = create_team_matchups("seasonData.txt")
+
+
+
+
     home_points_for *= points_for_weight
     road_points_for *= points_for_weight
     home_points_allowed *= points_against_weight
@@ -381,9 +377,9 @@ def create_team_matchups(filename):
         if (team_matchups[losing_team][winning_team][1] == -1):
             team_matchups[losing_team][winning_team][1] = losing_points_against
         else:
-            team_matchups[losing_team][winning_team][1] = (team_matchups[losing_team][winning_team][1] + losing_points_against) / 2        
+            team_matchups[losing_team][winning_team][1] = (team_matchups[losing_team][winning_team][1] + losing_points_against) / 2
     return team_matchups
-    
+
 
 def get_weights(day_of_week, time_of_day):
     points_for_weight = 1/16.57988911
@@ -424,7 +420,7 @@ def get_weights(day_of_week, time_of_day):
         points_for_time_weight = points_for_eight_weight
         points_against_time_weight = points_against_eight_weight
         
-    weight_sum = points_for_weight + points_against_weight + points_for_home_weight + points_against_home_weight + points_for_road_weight + points_against_road_weight + points_for_day_weight + points_against_day_weight + points_for_time_weight + points_against_time_weight           
+    weight_sum = points_for_weight + points_against_weight + points_for_home_weight + points_against_home_weight + points_for_road_weight + points_against_road_weight + points_for_day_weight + points_against_day_weight + points_for_time_weight + points_against_time_weight
     points_for_weight *= 8/weight_sum
     points_against_weight *= 8/weight_sum
     points_for_home_weight *= 8/weight_sum
