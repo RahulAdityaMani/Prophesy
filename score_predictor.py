@@ -439,17 +439,16 @@ if __name__ == '__main__':
     team_matchups = create_team_matchups("seasonData.txt")
 
     file = open("InputData.txt", "r")
-    
-    
+
+
     individual_game_info = [str(line.strip()) for line in file]
     file.close()
-    
+
     output = open('Output.txt', 'w')
     for curr_game in individual_game_info:
         curr_game_info = curr_game.split(",")
         predicted_score = predict_score(team_data, str(curr_game_info[0]), str(curr_game_info[1]), str(curr_game_info[2]), int(curr_game_info[3]))
         output.write(str(predicted_score[0]) + "," + str(predicted_score[1]) + '\n')
-        
-       
-       
-       
+
+
+
